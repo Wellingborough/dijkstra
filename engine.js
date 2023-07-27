@@ -31,7 +31,7 @@ function generateGraph()
 
   var options = {
     nodes: {
-      shape: "dot",
+      shape: "circle",
       size: 30,
       font: {
         size: 32,
