@@ -14,11 +14,11 @@ function generateGraph()
 
   // create an array with edges
   var edges = new vis.DataSet([
-    { from: 1, to: 3 },
-    { from: 1, to: 2 },
-    { from: 2, to: 4 },
-    { from: 2, to: 5 },
-    { from: 3, to: 3 },
+    { from: 1, to: 3, label: "12" },
+    { from: 1, to: 2, label: "10" },
+    { from: 2, to: 4, label: "7" },
+    { from: 2, to: 5, label: "14" },
+    { from: 3, to: 3, label: "6" },
   ]);
 
   // create a network
