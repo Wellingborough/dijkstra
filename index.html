@@ -18,7 +18,7 @@
     <title>Dijkstra's Algorithm</title>
 
     <meta name="keywords" content="Dijkstra, A*, Shortest Path First, Graph">
-    <meta name="description" content="Dijkstrat's Algorithm Demonstrator">
+    <meta name="description" content="Dijkstra's Algorithm Demonstrator">
     <meta name="author" content="Mark Gamble">
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -78,41 +78,16 @@
     <!-- Responsive design to stack the Editor, CPU Canvas, Memory, and Console at -->
     <!-- anything less than sm - may need to consider stacking at sm too.          -->
     
-    <div class="container-fluid" style="margin-left: 0; margin-right: 0;">
+    <div class="container-fluid" style="margin-left: 8px; margin-right: 8px;">
       <div class="row">
         <div class="col-sm-4" id="menuholder" style="padding:0px;">
           <p>Menu</p>
+          <span class="input-group-text" id="basic-addon1">@</span>
+          <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+          <button type="button" class="btn btn-dark">Dark</button>
         </div>
         <div class="col-sm-8" id="graph">
           <div id="mynetwork"></div>
-          <script type="text/javascript">
-            // create an array with nodes
-            var nodes = new vis.DataSet([
-              { id: 1, label: "Node 1" },
-              { id: 2, label: "Node 2" },
-              { id: 3, label: "Node 3" },
-              { id: 4, label: "Node 4" },
-              { id: 5, label: "Node 5" },
-            ]);
-      
-            // create an array with edges
-            var edges = new vis.DataSet([
-              { from: 1, to: 3 },
-              { from: 1, to: 2 },
-              { from: 2, to: 4 },
-              { from: 2, to: 5 },
-              { from: 3, to: 3 },
-            ]);
-      
-            // create a network
-            var container = document.getElementById("mynetwork");
-            var data = {
-              nodes: nodes,
-              edges: edges,
-            };
-            var options = {};
-            var network = new vis.Network(container, data, options);
-          </script>
         </div>
       </div>
     </div>
