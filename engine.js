@@ -5,10 +5,10 @@ function generateGraph()
 {
   // create an array with nodes
   var nodes = new vis.DataSet([
-    { id: 1, label: "A" },
-    { id: 2, label: "B" },
+    { id: 1, label: "AA" },
+    { id: 2, label: "BB" },
     { id: 3, label: "C" },
-    { id: 4, label: "D" },
+    { id: 4, label: "DD" },
     { id: 5, label: "E" },
   ]);
 
