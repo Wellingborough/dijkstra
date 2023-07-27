@@ -6,9 +6,9 @@ function generateGraph()
   // create an array with nodes
   var nodes = new vis.DataSet([
     { id: 1, label: "A" },
-    { id: 2, label: "B" },
-    { id: 3, label: "C" },
-    { id: 4, label: "D" },
+    { id: 2, label: "Bb" },
+    { id: 3, label: " C" },
+    { id: 4, label: " D " },
     { id: 5, label: "E" },
   ]);
 
@@ -32,7 +32,7 @@ function generateGraph()
   var options = {
     nodes: {
       shape: "circle",
-      size: 30,
+      size: 40,
       font: {
         size: 32,
       },
