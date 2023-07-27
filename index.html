@@ -31,6 +31,10 @@
       type="text/javascript"
       src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
     ></script>
+    <script
+      type="text/javascript"
+      src="engine.js"
+    ></script>
     <style type="text/css">
       #mynetwork {
         width: 600px;
@@ -84,7 +88,7 @@
           <p>Menu</p>
           <span class="input-group-text" id="basic-addon1">@</span>
           <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-          <button type="button" class="btn btn-dark">Dark</button>
+          <button type="button" class="btn btn-dark" onclick="generateGraph()">Dark</button>
         </div>
         <div class="col-sm-8" id="graph">
           <div id="mynetwork"></div>
