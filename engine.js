@@ -62,6 +62,6 @@ function generateGraph()
 
 function markNodeVisited()
 {
-  thisId = document.getElementById(visited-node-id").value;
+  thisId = document.getElementById("visited-node-id").value;
   nodes.update([{ id: thisId, group: 1 }]);;
 }
