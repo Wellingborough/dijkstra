@@ -87,8 +87,9 @@
         <div class="col-sm-4" id="menuholder" style="padding:0px;">
           <p>Menu</p>
           <span class="input-group-text" id="basic-addon1">Graph Settings</span>
-          <input type="text" class="form-control" placeholder="Username" aria-label="Number of vertices (nodes)" aria-describedby="basic-addon1">
           <button type="button" class="btn btn-dark" onclick="generateGraph()">Create Graph</button>
+          <input type="text" id="visited-node-id" class="form-control" placeholder="NodeId" aria-label="Number of vertices (nodes)" aria-describedby="basic-addon1">
+          <button type="button" class="btn btn-dark" onclick="markNodeVisited()">Visit Node</button>
         </div>
         <div class="col-sm-8" id="graph">
           <div id="mynetwork"></div>
