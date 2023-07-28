@@ -1,28 +1,30 @@
 //
 // JavaScript code for the Dijkstra's Algorithm Demonstrator
 //
+var nodes, edges, network;
+
 function generateGraph()
 {
-  // create an array with nodes
-  var nodes = new vis.DataSet([
-    { id: 1, label: " A " },
-    { id: 2, label: " B " },
-    { id: 3, label: " C " },
-    { id: 4, label: " D " },
-    { id: 5, label: " E " },
-    { id: 6, label: " F " },
-    { id: 7, label: " G " },
-    { id: 8, label: " H " },
+  // Populate the nodes array with nodes
+  nodes = new vis.DataSet([
+    { id: 1, label: " A ", group: 0 },
+    { id: 2, label: " B ", group: 0 },
+    { id: 3, label: " C ", group: 0 },
+    { id: 4, label: " D ", group: 0 },
+    { id: 5, label: " E ", group: 0 },
+    { id: 6, label: " F ", group: 0 },
+    { id: 7, label: " G ", group: 0 },
+    { id: 8, label: " H ", group: 0 },
   ]);
 
-  // create an array with edges
-  var edges = new vis.DataSet([
+  // Populate the edges array with edges
+  edges = new vis.DataSet([
     { from: 1, to: 2, label: "8" },
     { from: 1, to: 3, label: "5" },
+    { from: 2, to: 3, label: "2" },
     { from: 2, to: 4, label: "14" },
     { from: 2, to: 5, label: "3" },
     { from: 3, to: 5, label: "10" },
-    { from: 4, to: 5, label: "3" },
     { from: 4, to: 5, label: "3" },
     { from: 4, to: 6, label: "7" },
     { from: 5, to: 6, label: "1" },
@@ -55,5 +57,10 @@ function generateGraph()
     },
   };
 
-  var network = new vis.Network(container, data, options);
+  network = new vis.Network(container, data, options);
+}
+
+function markNodeVisited(thisId)
+{
+  nodes.update([{ id: thisId, group: 1 }]);;
 }
