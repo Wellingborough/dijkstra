@@ -60,7 +60,8 @@ function generateGraph()
   network = new vis.Network(container, data, options);
 }
 
-function markNodeVisited(thisId)
+function markNodeVisited()
 {
+  thisId = document.getElementById(visited-node-id").value;
   nodes.update([{ id: thisId, group: 1 }]);;
 }
