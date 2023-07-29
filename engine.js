@@ -79,8 +79,8 @@ var adjacencyList = [];
 
 function buildAdjacencyList()
 {
-  nodeList = nodes.get();
-  edgeList = edges.get();
+  nodeList = nodes.get({fields: ['id', 'label', 'group']});
+  edgeList = edges.get({fields: ['from', 'to', 'label']});
 
   for (let node in nodeList) {
     newEntry = [];
