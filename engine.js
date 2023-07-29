@@ -66,4 +66,39 @@ function markNodeVisited()
   thisNode = nodes.get(parseInt(thisId));
   thisNode['group'] = 1
   nodes.update(thisNode);
+  buildAdjacencyList();
+}
+
+//
+// adjacencyList is an array containing arrays; one per node
+// each node array consists of a node label, followed by an
+// object which holds the edges from that node.
+// E.g.,
+// aL = [["A", {"B": 5, "C": 8}], ...]
+var adjacencyList = [];
+
+function buildAdjacencyList()
+{
+  nodeList = nodes.get();
+  edgeList = edges.get();
+
+  for (let node in nodeList) {
+    newEntry = [];
+    nodeLabel = node['label'];
+
+    for (let edge in edgeList) {
+      if (edge['from'] == node['id']) {
+        alert("Would add"+str(edge));
+      }
+
+      if (edge['to'] == node['id']) {
+        alert("Would add"+str(edge));
+      }
+    }
+  }
+}
+
+function solveDijkstra()
+{
+  ;
 }
