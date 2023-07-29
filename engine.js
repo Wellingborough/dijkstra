@@ -97,9 +97,9 @@ function buildAdjacencyList()
       }
     }
 
-    newEntry.append(nodeLabel);
-    newEntry.append(adjacencies);
-    adjacencyList.append(newEntry)
+    newEntry.push(nodeLabel);
+    newEntry.push(adjacencies);
+    adjacencyList.push(newEntry)
   }
   console.log(adjacencyList);
 }
