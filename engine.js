@@ -82,17 +82,17 @@ function buildAdjacencyList()
   nodeList = nodes.get({fields: ['id', 'label', 'group']});
   edgeList = edges.get({fields: ['from', 'to', 'label']});
 
-  for (let node in nodeList) {
+  for (let node of nodeList) {
     newEntry = [];
     nodeLabel = node['label'];
 
-    for (let edge in edgeList) {
+    for (let edge of edgeList) {
       if (edge['from'] == node['id']) {
-        alert("Would add"+str(edge));
+        alert("Would add"+edge.toStr());
       }
 
       if (edge['to'] == node['id']) {
-        alert("Would add"+str(edge));
+        alert("Would add"+edge.toStr());
       }
     }
   }
