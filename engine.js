@@ -86,16 +86,22 @@ function buildAdjacencyList()
     newEntry = [];
     nodeLabel = node['label'];
 
+    let adjacencies = {}
     for (let edge of edgeList) {
       if (edge['from'] == node['id']) {
-        alert("Would add"+edge.toStr());
+        adjacencies[edge['to']] = edge['label'];
       }
 
       if (edge['to'] == node['id']) {
-        alert("Would add"+edge.toStr());
+        adjacencies[edge['from']] = edge['label'];
       }
     }
+
+    newEntry.append(nodeLabel);
+    newEntry.append(adjacencies);
+    adjacencyList.append(newEntry)
   }
+  console.log(adjacencyList);
 }
 
 function solveDijkstra()
