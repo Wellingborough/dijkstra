@@ -74,9 +74,8 @@ function generateGraph()
 // group 1 == current node
 // group 2 == visited
 //
-function markNodeVisited(thisGroup)
+function markNode(thisId, thisGroup)
 {
-  thisId = document.getElementById("visited-node-id").value;
   thisNode = nodes.get(parseInt(thisId));
   thisNode['group'] = thisGroup;
   nodes.update(thisNode);
@@ -133,6 +132,20 @@ function mapNodeIdToLabel(thisId) {
   return retval ;
 }
 
+function mapNodeLabelToId(thisLabel) {
+  nodeList = nodes.get({fields: ['id', 'label', 'group']});
+  let retval = -1;
+  
+  for (let node of nodeList) {
+    if (node['label'] == thisLabel) {
+      retval = node['id'];
+      break;
+    }
+  }
+  return retval ;
+}
+
+
 function solveDijkstra()
 {
   //
@@ -176,7 +189,7 @@ function solveDijkstra()
   // Step 1c - "Set the starting point as the current vertex."
   //
   var currentVertex = sourceVertex;
-
+  
   //
   // "Step 1d - Set the cost from the starting point to the current vertex as zero."
   //
@@ -194,6 +207,7 @@ function solveDijkstra()
     //
     console.log("--------------------------------------");
     console.log("Pass: %d - Current Vertex: %s", passNumber, currentVertex);
+    markNode(mapNodeLabelToId(currentVertex), 1);
 
     //
     // Find our currently recorded cost for getting to currentVertex from the
@@ -270,6 +284,7 @@ function solveDijkstra()
     // the current vertex as visited.
     //
     visitedVertices.push(currentVertex);
+    markNode(mapNodeLabelToId(currentVertex), 2);
 
     //
     // Step 3 - If all of the vertices have been visited, then stop.
