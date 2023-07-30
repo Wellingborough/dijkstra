@@ -148,7 +148,6 @@ function mapNodeLabelToId(thisLabel) {
 
 function solveDijkstra()
 {
-  buildAdjacencyList();
   //
   // "Step 1a - Select a vertex as the starting point, ..."
   //
