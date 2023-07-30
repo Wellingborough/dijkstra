@@ -165,8 +165,12 @@ function mapNodeLabelToId(thisLabel) {
   return retval ;
 }
 
+//
+// These variables at global level to be used by results display
+//
 var distances = [];
 var visitedVertices = [];
+var tableUpdates = [];
 
 function solveDijkstra()
 {
@@ -207,6 +211,9 @@ function solveDijkstra()
   //
   visitedVertices = [];
 
+  // For convenience of GUI only
+  tableUpdates = [];
+  
   //
   // Step 1c - "Set the starting point as the current vertex."
   //
@@ -229,6 +236,8 @@ function solveDijkstra()
     //
     console.log("--------------------------------------");
     console.log("Pass: %d - Current Vertex: %s", passNumber, currentVertex);
+
+    var tableUpdate = {};
     
     //
     // Find our currently recorded cost for getting to currentVertex from the
@@ -285,6 +294,7 @@ function solveDijkstra()
                 vertexDist[2].push(currentVertex);
                 console.log("Found a new route: %s", vertexDist[2]);
                 console.log("Cost: %d", vertexDist[1]);
+                tableUpdate[currentVertex] = vertexDist[1];
               }
               else if (vertexDist[1] > neighbourCost + currentDistance) {
                 oldCost = vertexDist[1];
@@ -294,6 +304,7 @@ function solveDijkstra()
                 console.log("Found a better route %s", vertexDist[2]);
                 console.log("New cost: %d", vertexDist[1]);
                 console.log("Old cost: %d", oldCost);
+                tableUpdate[currentVertex] = vertexDist[1];
               }
             }
           }
@@ -305,7 +316,7 @@ function solveDijkstra()
     // the current vertex as visited.
     //
     visitedVertices.push(currentVertex);
-
+    tableUpdates.push(tableUpdate);
     //
     // Step 3 - If all of the vertices have been visited, then stop.
     //
@@ -370,7 +381,7 @@ function stepRoute()
   //
   // Update the table with the next step
   //
-  var displayString = "distances" + distances[step]+ "   visitedVertices" + visitedVertices[step];
+  var displayString = "visitedVertices" + visitedVertices[step] + "   Table updates: " + tableUpdates[step];
   document.getElementById("show-distances").innerHTML = displayString;
   markNode(mapNodeLabelToId(visitedVertices[step]), 1);
 
