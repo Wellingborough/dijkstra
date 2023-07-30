@@ -235,7 +235,6 @@ function solveDijkstra()
             continue;
           }
           console.log("Considering %s", neighbour);
-
           for (vertexDist of distances) {
             if (vertexDist[0] == neighbour) {
               //
@@ -260,12 +259,12 @@ function solveDijkstra()
                 console.log("Found a better route %s", vertexDist[2]);
                 console.log("New cost: %d", vertexDist[1]);
                 console.log("Old cost: %d", oldCost);
+              }
             }
           }
         }
       }
     }
-  
     //
     // Step 2c - When all of the unvisited neighbours have been considered, mark
     // the current vertex as visited.
@@ -314,5 +313,4 @@ function solveDijkstra()
       console.log(d);
   }
   console.log("Complete");
-  }
 }
