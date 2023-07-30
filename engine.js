@@ -166,6 +166,7 @@ function mapNodeLabelToId(thisLabel) {
 }
 
 var distances = [];
+var visitedVertices = [];
 
 function solveDijkstra()
 {
@@ -204,7 +205,7 @@ function solveDijkstra()
   //
   // Step 1b - "Mark all vertices as unvisited."
   //
-  var visitedVertices = [];
+  visitedVertices = [];
 
   //
   // Step 1c - "Set the starting point as the current vertex."
@@ -304,7 +305,6 @@ function solveDijkstra()
     // the current vertex as visited.
     //
     visitedVertices.push(currentVertex);
-    markNode(mapNodeLabelToId(currentVertex), 2);
 
     //
     // Step 3 - If all of the vertices have been visited, then stop.
@@ -364,7 +364,8 @@ function stepRoute()
   //
   // Update the table with the next step
   //
-  document.getElementById("show-distances").innerHTML = distances[step];
+  var displayString = "distances" + distances[step]+ "   visitedVertices" + visitedVertices[step];
+  document.getElementById("show-distances").innerHTML = displayString;
   markNode(mapNodeLabelToId(distances[step][0]), 1);
 
   if (step > 0) {
