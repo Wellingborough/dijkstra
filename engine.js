@@ -64,11 +64,16 @@ function generateGraph()
   };
 
   network = new vis.Network(container, data, options);
+
+  //
+  // Finally, build the adjacency list for the graph
+  //
+  buildAdjacencyList();
 }
 
 //
 // Change the 'group' attribute of a node to show that it has
-// been visitedor is the currentnode:
+// been visited, or is the currentnode:
 //
 // group 0 == initial state
 // group 1 == current node
@@ -81,14 +86,15 @@ function markNode(thisId, thisGroup)
   nodes.update(thisNode);
 }
 
-
+//
+// TEMP - for GUI testing only
+//
 function markNodeVisited(thisGroup)
 {
   thisId = document.getElementById("visited-node-id").value;
   thisNode = nodes.get(parseInt(thisId));
   thisNode['group'] = thisGroup;
   nodes.update(thisNode);
-  buildAdjacencyList();
 }
 
 //
@@ -101,6 +107,11 @@ var adjacencyList = [];
 
 function buildAdjacencyList()
 {
+  //
+  // Reset the list
+  //
+  ajacencyList = [];
+  
   nodeList = nodes.get({fields: ['id', 'label', 'group']});
   edgeList = edges.get({fields: ['from', 'to', 'label']});
 
@@ -154,6 +165,7 @@ function mapNodeLabelToId(thisLabel) {
   return retval ;
 }
 
+var distances = [];
 
 function solveDijkstra()
 {
@@ -180,7 +192,7 @@ function solveDijkstra()
   // "Step 1a - ... and set the costs to all other vertices as infinite."
   //
 
-  var distances = [];
+  distances = [];
   var emptyRoute = [];
   var infiniteCost = -1;
 
@@ -337,4 +349,33 @@ function solveDijkstra()
       console.log(d);
   }
   console.log("Complete");
+}
+
+var step = -1;
+
+function stepRoute()
+{
+  //
+  // Check if we are just beginning the route steps, if so, wipe the table
+  //
+  if (step == -1) {
+    step = 0;
+  }
+
+  //
+  // Update the table with the next step
+  //
+  document.getElementById("show-distances").innerHTML = distances[count];
+
+  //
+  // Increment
+  //
+  step += 1;
+
+  //
+  // If we have reached the end, reset the step counter to -1
+  //
+  if (step == distances.length) {
+    step = -1;
+  }
 }
