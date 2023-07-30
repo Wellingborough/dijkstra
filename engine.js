@@ -365,7 +365,7 @@ function stepRoute()
   //
   // Update the table with the next step
   //
-  document.getElementById("show-distances").innerHTML = distances[count];
+  document.getElementById("show-distances").innerHTML = distances[step];
 
   //
   // Increment
