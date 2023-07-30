@@ -148,6 +148,7 @@ function mapNodeLabelToId(thisLabel) {
 
 function solveDijkstra()
 {
+  buildAdjacencyList();
   //
   // "Step 1a - Select a vertex as the starting point, ..."
   //
@@ -207,7 +208,7 @@ function solveDijkstra()
     //
     console.log("--------------------------------------");
     console.log("Pass: %d - Current Vertex: %s", passNumber, currentVertex);
-    //markNode(mapNodeLabelToId(currentVertex), 1);
+    markNode(mapNodeLabelToId(currentVertex), 1);
 
     //
     // Find our currently recorded cost for getting to currentVertex from the
@@ -284,7 +285,7 @@ function solveDijkstra()
     // the current vertex as visited.
     //
     visitedVertices.push(currentVertex);
-    //markNode(mapNodeLabelToId(currentVertex), 2);
+    markNode(mapNodeLabelToId(currentVertex), 2);
 
     //
     // Step 3 - If all of the vertices have been visited, then stop.
