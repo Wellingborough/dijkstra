@@ -226,7 +226,7 @@ function solveDijkstra()
       if (adjacency[0] == currentVertex) {
         neighbourDict = adjacency[1];
         
-        for (connection of neighbourDict) {
+        for (connection in neighbourDict) {
           neighbour = connection;
           neighbourCost = neighbourDict[connection];
 
