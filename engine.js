@@ -3,6 +3,12 @@
 //
 var nodes, edges, network;
 
+//
+// Create a graph to be analysed
+// Currently hard-coded, should be randomised with some degree
+// of design, e.g., min/max edges per node, work from one node
+// 'outwards' to get some degree of 'flow'.
+//
 function generateGraph()
 {
   // Populate the nodes array with nodes
@@ -60,11 +66,19 @@ function generateGraph()
   network = new vis.Network(container, data, options);
 }
 
-function markNodeVisited()
+//
+// Change the 'group' attribute of a node to show that it has
+// been visitedor is the currentnode:
+//
+// group 0 == initial state
+// group 1 == current node
+// group 2 == visited
+//
+function markNodeVisited(thisGroup)
 {
   thisId = document.getElementById("visited-node-id").value;
   thisNode = nodes.get(parseInt(thisId));
-  thisNode['group'] = 1
+  thisNode['group'] = thisGroup;
   nodes.update(thisNode);
   buildAdjacencyList();
 }
@@ -121,5 +135,179 @@ function mapNodeIdToLabel(thisId) {
 
 function solveDijkstra()
 {
-  ;
+  //
+  // "Step 1a - Select a vertex as the starting point, ..."
+  //
+  var sourceVertex = " A ";
+  var destinationVertex = " H ";
+
+  console.log("Finding a route from %s to %s" % (sourceVertex, destinationVertex));
+
+  var stillSearching = true;
+  var passNumber = 1;
+  var route = [];
+
+  //
+  // The distances list contains an entry (itself a list) for each vertex,
+  // these entries show how much it 'costs' to get from the source vertex
+  // to the named vertex, and also the route to use to get to that vertex.
+  // A distance value of -1 is used as a substitute for infinity.
+  //
+  // We create the distances list automatically, from the adjacencyList.
+  //
+  // "Step 1a - ... and set the costs to all other vertices as infinite."
+  //
+
+  var distances = [];
+  var emptyRoute = [];
+  var infiniteCost = -1;
+
+  for (adjacency of adjacencyList) {
+    dEntry = [adjacency[0], infiniteCost, emptyRoute];
+    distances.push(dEntry);
+  }
+  
+  //
+  // Step 1b - "Mark all vertices as unvisited."
+  //
+  var visitedVertices = [];
+
+  //
+  // Step 1c - "Set the starting point as the current vertex."
+  //
+  var currentVertex = sourceVertex;
+
+  //
+  // "Step 1d - Set the cost from the starting point to the current vertex as zero."
+  //
+  // Leave all other distance as 'infinite' (represented by -1 in this program)
+  //
+  for (d of distances) {
+    if (d[0] == sourceVertex) {
+      d[1] = 0;
+    }
+  }
+  
+  while (stillSearching) {
+    //
+    // Show some tracing information...
+    //
+    console.log("--------------------------------------");
+    console.log("Pass: %d - Current Vertex: %s" % (passNumber, currentVertex));
+
+    //
+    // Find our currently recorded cost for getting to currentVertex from the
+    // starting point.
+    //
+    found = false;
+    currentDistance = 0;
+    for (d of distances) {
+      if (d[0] == currentVertex) {
+        found = true;
+        currentDistance = d[1];
+        route = d[2].copy();
+      }
+    }
+
+    if (not found) {
+      console.log("Error - could not find %s in distances array." % currentVertex);
+      return;
+    }
+    console.log("Cost from %s to %s is %d" % (sourceVertex,
+                                        currentVertex,
+                                        currentDistance));
+
+    //
+    // Step 2a - Consider all of the unvisited neighbours for the current vertex...
+    //
+    for (adjacency of adjacencyList) {
+      if (adjacency[0] == currentVertex) {
+        neighbourDict = adjacency[1];
+        
+        for (connection of neighbourDict) {
+          neighbour = connection;
+          neighbourCost = neighbourDict[connection];
+
+          if (neighbour in visitedVertices) {
+            console.log("Already visited %s" % neighbour);
+            continue;
+          }
+          console.log("Considering %s" % neighbour);
+
+          for (vertexDist of distances) {
+            if (vertexDist[0] == neighbour) {
+              //
+              // Step 2b - If this cost is less than the value
+              // currently in the table, update the table with the
+              // new cost and route
+              //
+              if (vertexDist[1] == infiniteCost) {
+                vertexDist[1] = neighbourCost + currentDistance
+                vertexDist[2] = route.copy()
+                vertexDist[2].append(currentVertex);
+                console.log("Found a new route: %s" % (vertexDist[2]));
+                console.log("Cost: %d" % (vertexDist[1]));
+              }
+              else if (vertexDist[1] > neighbourCost + currentDistance) {
+                oldCost = vertexDist[1];
+                vertexDist[1] = neighbourCost + currentDistance;
+                vertexDist[2] = route.copy();
+                vertexDist[2].append(currentVertex);
+                console.log("Found a better route %s" % (vertexDist[2]));
+                console.log("New cost: %d" % (vertexDist[1]));
+                console.log("Old cost: %d" % oldCost);
+            }
+          }
+        }
+      }
+    }
+  
+    //
+    // Step 2c - When all of the unvisited neighbours have been considered, mark
+    // the current vertex as visited.
+    //
+    visitedVertices.push(currentVertex);
+
+    //
+    // Step 3 - If all of the vertices have been visited, then stop.
+    //
+    if (len(visitedVertices) == len(adjacencyList)) {
+      stillSearching = false;
+    }
+      
+    //
+    // Step 4 - Otherwise, look at the unvisited vertices, and select the vertex with
+    // the lowest cost, set this as the current vertex and go back to step 2.
+    //
+    candidateVertex = "Z";
+    lowestCost = 999;
+
+    for (vertexDistance of distances) {
+      if (vertexDistance[0] in visitedVertices) {
+        pass;
+      }
+      else if (vertexDistance[1] == infiniteCost) {
+        pass;
+      }
+      else {
+        if (vertexDistance[1] < lowestCost) {
+          lowestCost = vertexDistance[1]
+          candidateVertex = vertexDistance[0]
+        }
+      }
+    }
+    currentVertex = candidateVertex;
+
+    passNumber = passNumber + 1;
+  }
+  
+  //
+  // Show the full distances and routes list
+  //
+  console.log("--------------------------------------");
+  console.log("\nResults:");
+  for (d of distances) {
+      console.log(d);
+  }
+  console.log("Complete");
 }
