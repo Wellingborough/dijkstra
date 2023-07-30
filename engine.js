@@ -89,11 +89,13 @@ function buildAdjacencyList()
     let adjacencies = {}
     for (let edge of edgeList) {
       if (edge['from'] == node['id']) {
-        adjacencies[edge['to']] = edge['label'];
+        var thisLabel = mapNodeIdToLabel(edge['to']);
+        adjacencies[thisLabel] = edge['label'];
       }
 
       if (edge['to'] == node['id']) {
-        adjacencies[edge['from']] = edge['label'];
+        var thisLabel = mapNodeIdToLabel(edge['from']);
+        adjacencies[thisLabel] = edge['label'];
       }
     }
 
@@ -102,6 +104,18 @@ function buildAdjacencyList()
     adjacencyList.push(newEntry)
   }
   console.log(adjacencyList);
+}
+
+function mapNodeIdToLabel(thisId) {
+  nodeList = nodes.get({fields: ['id', 'label', 'group']});
+  let retval = "None";
+  
+  for (let node of nodeList) {
+    if (node['id'] == thisId) {
+      retval = node['label'];
+      break;
+    }
+  return retval ;
 }
 
 function solveDijkstra()
