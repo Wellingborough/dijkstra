@@ -310,4 +310,5 @@ function solveDijkstra()
       console.log(d);
   }
   console.log("Complete");
+  }
 }
