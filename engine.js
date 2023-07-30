@@ -228,8 +228,7 @@ function solveDijkstra()
     //
     console.log("--------------------------------------");
     console.log("Pass: %d - Current Vertex: %s", passNumber, currentVertex);
-    markNode(mapNodeLabelToId(currentVertex), 1);
-
+    
     //
     // Find our currently recorded cost for getting to currentVertex from the
     // starting point.
@@ -366,6 +365,11 @@ function stepRoute()
   // Update the table with the next step
   //
   document.getElementById("show-distances").innerHTML = distances[step];
+  markNode(mapNodeLabelToId(distances[step][0]), 1);
+
+  if (step > 0) {
+    markNode(mapNodeLabelToId(distances[step-1][0]), 2);
+  }
 
   //
   // Increment
