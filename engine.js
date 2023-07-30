@@ -115,6 +115,7 @@ function mapNodeIdToLabel(thisId) {
       retval = node['label'];
       break;
     }
+  }
   return retval ;
 }
 
