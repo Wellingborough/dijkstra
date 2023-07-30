@@ -294,7 +294,7 @@ function solveDijkstra()
                 vertexDist[2].push(currentVertex);
                 console.log("Found a new route: %s", vertexDist[2]);
                 console.log("Cost: %d", vertexDist[1]);
-                tableUpdate[currentVertex] = vertexDist[1];
+                tableUpdate[neighbour] = vertexDist[1];
               }
               else if (vertexDist[1] > neighbourCost + currentDistance) {
                 oldCost = vertexDist[1];
@@ -304,7 +304,7 @@ function solveDijkstra()
                 console.log("Found a better route %s", vertexDist[2]);
                 console.log("New cost: %d", vertexDist[1]);
                 console.log("Old cost: %d", oldCost);
-                tableUpdate[currentVertex] = vertexDist[1];
+                tableUpdate[neighbour] = vertexDist[1];
               }
             }
           }
