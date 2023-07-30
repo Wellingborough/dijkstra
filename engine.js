@@ -209,7 +209,7 @@ function solveDijkstra()
       }
     }
 
-    if (not found) {
+    if (found == false) {
       console.log("Error - could not find %s in distances array." % currentVertex);
       return;
     }
