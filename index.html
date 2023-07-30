@@ -7,12 +7,6 @@
     <!-- I am indebted to the GraphViz authors for Graphviz:              -->
     <!--    https://graphviz.org/                                         -->
 
-
-
-
-
-
-    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dijkstra's Algorithm</title>
@@ -89,7 +83,8 @@
           <span class="input-group-text" id="basic-addon1">Graph Settings</span>
           <button type="button" class="btn btn-dark" onclick="generateGraph()">Create Graph</button>
           <input type="text" id="visited-node-id" class="form-control" placeholder="NodeId" aria-label="Number of vertices (nodes)" aria-describedby="basic-addon1">
-          <button type="button" class="btn btn-dark" onclick="markNodeVisited()">Visit Node</button>
+          <button type="button" class="btn btn-dark" onclick="markNodeVisited(1)">Visit Node</button>
+          <button type="button" class="btn btn-dark" onclick="solveDijkstra()">Solve</button>
         </div>
         <div class="col-sm-8" id="graph">
           <div id="mynetwork"></div>
