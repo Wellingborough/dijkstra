@@ -141,7 +141,7 @@ function solveDijkstra()
   var sourceVertex = " A ";
   var destinationVertex = " H ";
 
-  console.log("Finding a route from %s to %s" % (sourceVertex, destinationVertex));
+  console.log("Finding a route from %s to %s", sourceVertex, destinationVertex);
 
   var stillSearching = true;
   var passNumber = 1;
@@ -193,7 +193,7 @@ function solveDijkstra()
     // Show some tracing information...
     //
     console.log("--------------------------------------");
-    console.log("Pass: %d - Current Vertex: %s" % (passNumber, currentVertex));
+    console.log("Pass: %d - Current Vertex: %s", passNumber, currentVertex);
 
     //
     // Find our currently recorded cost for getting to currentVertex from the
@@ -215,9 +215,9 @@ function solveDijkstra()
       console.log("Error - could not find %s in distances array." % currentVertex);
       return;
     }
-    console.log("Cost from %s to %s is %d" % (sourceVertex,
+    console.log("Cost from %s to %s is %d", sourceVertex,
                                         currentVertex,
-                                        currentDistance));
+                                        currentDistance);
 
     //
     // Step 2a - Consider all of the unvisited neighbours for the current vertex...
@@ -231,10 +231,10 @@ function solveDijkstra()
           neighbourCost = neighbourDict[connection];
 
           if (visitedVertices.includes(neighbour)) {
-            console.log("Already visited %s" % neighbour);
+            console.log("Already visited %s", neighbour);
             continue;
           }
-          console.log("Considering %s" % neighbour);
+          console.log("Considering %s", neighbour);
 
           for (vertexDist of distances) {
             if (vertexDist[0] == neighbour) {
@@ -249,17 +249,17 @@ function solveDijkstra()
                 vertexDist[1] = neighbourCost + currentDistance
                 vertexDist[2] = [...route];
                 vertexDist[2].push(currentVertex);
-                console.log("Found a new route: %s" % (vertexDist[2]));
-                console.log("Cost: %d" % (vertexDist[1]));
+                console.log("Found a new route: %s", vertexDist[2]);
+                console.log("Cost: %d", vertexDist[1]);
               }
               else if (vertexDist[1] > neighbourCost + currentDistance) {
                 oldCost = vertexDist[1];
                 vertexDist[1] = neighbourCost + currentDistance;
                 vertexDist[2] = [...route];
                 vertexDist[2].push(currentVertex);
-                console.log("Found a better route %s" % (vertexDist[2]));
-                console.log("New cost: %d" % (vertexDist[1]));
-                console.log("Old cost: %d" % oldCost);
+                console.log("Found a better route %s", vertexDist[2]);
+                console.log("New cost: %d", vertexDist[1]);
+                console.log("Old cost: %d", oldCost);
             }
           }
         }
