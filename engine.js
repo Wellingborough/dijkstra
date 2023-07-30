@@ -199,13 +199,15 @@ function solveDijkstra()
     // Find our currently recorded cost for getting to currentVertex from the
     // starting point.
     //
+    //  Use the spread operator (...) to make a copy
+    //
     found = false;
     currentDistance = 0;
     for (d of distances) {
       if (d[0] == currentVertex) {
         found = true;
         currentDistance = d[1];
-        route = d[2].copy();
+        route = [...d[2]];
       }
     }
 
@@ -228,7 +230,7 @@ function solveDijkstra()
           neighbour = connection;
           neighbourCost = neighbourDict[connection];
 
-          if (neighbour in visitedVertices) {
+          if (visitedVertices.includes(neighbour)) {
             console.log("Already visited %s" % neighbour);
             continue;
           }
@@ -241,18 +243,20 @@ function solveDijkstra()
               // currently in the table, update the table with the
               // new cost and route
               //
+              // Use the spread operator (...) to make a copy
+              //
               if (vertexDist[1] == infiniteCost) {
                 vertexDist[1] = neighbourCost + currentDistance
-                vertexDist[2] = route.copy()
-                vertexDist[2].append(currentVertex);
+                vertexDist[2] = [...route];
+                vertexDist[2].push(currentVertex);
                 console.log("Found a new route: %s" % (vertexDist[2]));
                 console.log("Cost: %d" % (vertexDist[1]));
               }
               else if (vertexDist[1] > neighbourCost + currentDistance) {
                 oldCost = vertexDist[1];
                 vertexDist[1] = neighbourCost + currentDistance;
-                vertexDist[2] = route.copy();
-                vertexDist[2].append(currentVertex);
+                vertexDist[2] = [...route];
+                vertexDist[2].push(currentVertex);
                 console.log("Found a better route %s" % (vertexDist[2]));
                 console.log("New cost: %d" % (vertexDist[1]));
                 console.log("Old cost: %d" % oldCost);
@@ -271,7 +275,7 @@ function solveDijkstra()
     //
     // Step 3 - If all of the vertices have been visited, then stop.
     //
-    if (len(visitedVertices) == len(adjacencyList)) {
+    if (visitedVertices.length == adjacencyList.length) {
       stillSearching = false;
     }
       
@@ -283,11 +287,11 @@ function solveDijkstra()
     lowestCost = 999;
 
     for (vertexDistance of distances) {
-      if (vertexDistance[0] in visitedVertices) {
-        pass;
+      if (visitedVertices.includes(vertexDistance[0])) {
+        ;
       }
       else if (vertexDistance[1] == infiniteCost) {
-        pass;
+        ;
       }
       else {
         if (vertexDistance[1] < lowestCost) {
