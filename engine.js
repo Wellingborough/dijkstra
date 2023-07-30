@@ -381,7 +381,7 @@ function stepRoute()
   //
   // Update the table with the next step
   //
-  var displayString = "visitedVertices" + visitedVertices[step] + "   Table updates: " + tableUpdates[step];
+  var displayString = "visitedVertices" + visitedVertices[step] + "   Table updates: " + JSON.stringify(tableUpdates[step]);
   document.getElementById("show-distances").innerHTML = displayString;
   markNode(mapNodeLabelToId(visitedVertices[step]), 1);
 
