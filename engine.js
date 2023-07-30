@@ -79,6 +79,15 @@ function markNode(thisId, thisGroup)
   thisNode = nodes.get(parseInt(thisId));
   thisNode['group'] = thisGroup;
   nodes.update(thisNode);
+}
+
+
+function markNodeVisited(thisGroup)
+{
+  thisId = document.getElementById("visited-node-id").value;
+  thisNode = nodes.get(parseInt(thisId));
+  thisNode['group'] = thisGroup;
+  nodes.update(thisNode);
   buildAdjacencyList();
 }
 
