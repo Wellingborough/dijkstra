@@ -358,6 +358,12 @@ function stepRoute()
   // Check if we are just beginning the route steps, if so, wipe the table
   //
   if (step == -1) {
+    nodeList = nodes.get({fields: ['id', 'label', 'group']});
+  
+    for (let node of nodeList) {
+      nodeId = node['id'];
+      markNode(nodeId, 0);
+    }
     step = 0;
   }
 
@@ -366,10 +372,10 @@ function stepRoute()
   //
   var displayString = "distances" + distances[step]+ "   visitedVertices" + visitedVertices[step];
   document.getElementById("show-distances").innerHTML = displayString;
-  markNode(mapNodeLabelToId(distances[step][0]), 1);
+  markNode(mapNodeLabelToId(visitedVertices[step]), 1);
 
   if (step > 0) {
-    markNode(mapNodeLabelToId(distances[step-1][0]), 2);
+    markNode(mapNodeLabelToId(visitedVertices[step-1]), 2);
   }
 
   //
