@@ -228,7 +228,7 @@ function solveDijkstra()
         
         for (connection in neighbourDict) {
           neighbour = connection;
-          neighbourCost = neighbourDict[connection];
+          neighbourCost = parseInt(neighbourDict[connection]);
 
           if (visitedVertices.includes(neighbour)) {
             console.log("Already visited %s", neighbour);
