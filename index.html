@@ -87,6 +87,48 @@
           <button type="button" class="btn btn-dark" onclick="solveDijkstra()">Solve</button>
           <button type="button" class="btn btn-dark" onclick="stepRoute()">Step</button>
           <p id="show-distances">Route...</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Pass</th>
+                <th scope="col">Vertex</th>
+                <th scope="col">A</th>
+                <th scope="col">B</th>
+                <th scope="col">C</th>
+                <th scope="col">D</th>
+                <th scope="col">E</th>
+                <th scope="col">F</th>
+                <th scope="col">G</th>
+                <th scope="col">H</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>A</td>
+                <td>0</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>C</td>
+                <td>5</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+                <td>Infinity</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="col-sm-8" id="graph">
           <div id="mynetwork"></div>
