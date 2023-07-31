@@ -408,16 +408,24 @@ function addRow()
 {
   var x = document.createElement("tr");
 
-  var a = document.createElement("td");
+  var a = document.createElement("th");
   var anode = document.createTextNode(step);
+  var attr = document.createAttribute("scope");
+  attr.value = "row";
+  anode.setAttributeNode(b);
   a.appendChild(anode);
   x.appendChild(a);
+  
+  var b = document.createElement("td");
+  var bnode = document.createTextNode(step);
+  b.appendChild(bnode);
+  x.appendChild(b);
 
   for (let i = 0; i < 9; i++) {
-    a = document.createElement("td");
-    anode = document.createTextNode(20+i);
-    a.appendChild(anode);
-    x.appendChild(a);
+    b = document.createElement("td");
+    bnode = document.createTextNode(20+i);
+    b.appendChild(b);
+    x.appendChild(b);
   }
-  document.getElementById("dijkstra-table").appendChild(x);;
+  document.getElementById("dijkstra-table-body").appendChild(x);;
 }
