@@ -408,7 +408,7 @@ function copyRow()
 {
   tableRows = document.getElementById("dijkstra-table-body").rows;
   numRows = tableRows.length;
-  console.log(JSON.stingify(tableRows[numRows-1]));
+  console.log(JSON.stringify(tableRows[numRows-1]));
 }
 
 function addRow()
