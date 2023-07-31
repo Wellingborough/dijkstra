@@ -73,8 +73,8 @@
     </nav>
 
     <!-- Now the main container and divs.                                          -->
-    <!-- Responsive design to stack the Editor, CPU Canvas, Memory, and Console at -->
-    <!-- anything less than sm - may need to consider stacking at sm too.          -->
+    <!-- Responsive design to stack the controls and graph at anything less than   -->
+    <!-- sm - may need to consider stacking at sm too.                             -->
     
     <div class="container-fluid" style="margin-left: 8px; margin-right: 8px;">
       <div class="row">
@@ -87,6 +87,8 @@
           <button type="button" class="btn btn-dark" onclick="solveDijkstra()">Solve</button>
           <button type="button" class="btn btn-dark" onclick="stepRoute()">Step</button>
           <p id="show-distances">Route...</p>
+          <!-- Note, this table is programmatically bmodified in JavaScript, so any changes -->
+          <!-- in design here, must be reflected in engine.js too.                          -->
           <table class="table" id="dijkstra-table">
             <thead>
               <tr>
