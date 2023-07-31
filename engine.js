@@ -407,8 +407,8 @@ function stepRoute()
 function copyRow()
 {
   tableRows = document.getElementById("dijkstra-table-body").rows;
-  numRows = rows.length;
-  console.log(JSON.stingify(rows[numRows-1]));
+  numRows = tableRows.length;
+  console.log(JSON.stingify(tableRows[numRows-1]));
 }
 
 function addRow()
