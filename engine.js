@@ -406,9 +406,14 @@ function stepRoute()
 
 function copyRow()
 {
-  tableRows = document.getElementById("dijkstra-table-body").rows;
-  numRows = tableRows.length;
-  console.log(JSON.stringify(tableRows[numRows-1]));
+  var tableRows = document.getElementById("dijkstra-table-body").rows;
+  var numRows = tableRows.length;
+  var rowCells = tableRows[numRows-1].cells;
+  var numCells = rowCells.length;
+
+  for (let i = 0; i < numCells; i++) {
+    alert(rowCells[i].innerText);
+  }
 }
 
 function addRow()
