@@ -412,7 +412,7 @@ function addRow()
   var anode = document.createTextNode(step);
   var attr = document.createAttribute("scope");
   attr.value = "row";
-  anode.setAttributeNode(b);
+  a.setAttributeNode(attr);
   a.appendChild(anode);
   x.appendChild(a);
   
