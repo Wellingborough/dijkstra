@@ -426,6 +426,10 @@ function addRow()
   var rowCells = tableRows[numRows-1].cells;
 
   //
+  // Get the table updates for this pass
+  //
+  var rowUpdates = tableUpdates[step];
+  //
   // Now create the new row
   //
   var x = document.createElement("tr");
@@ -451,10 +455,22 @@ function addRow()
   b.appendChild(bnode);
   x.appendChild(b);
 
+  //
   // Cells 2 to end - distances
+  // Default to contents of previous row, but check for updates
+  //
   for (let i = 0; i < 8; i++) {
     b = document.createElement("td");
-    bnode = document.createTextNode(rowCells[i+2].innerText);
+    var newText = rowCells[i+2].innerText;
+
+    for (const property in rowUpdates) {
+      var vertexLabel = property;
+      var vertexId = mapNodeLabelToId(vertexLabel);
+      if vertexId == i+1) {
+        nextText = rowUpdates[property];
+      }
+    }
+    bnode = document.createTextNode(newText);
     b.appendChild(bnode);
     x.appendChild(b);
   }
