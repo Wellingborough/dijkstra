@@ -424,7 +424,7 @@ function addRow()
   for (let i = 0; i < 9; i++) {
     b = document.createElement("td");
     bnode = document.createTextNode(20+i);
-    b.appendChild(b);
+    b.appendChild(bnode);
     x.appendChild(b);
   }
   document.getElementById("dijkstra-table-body").appendChild(x);;
