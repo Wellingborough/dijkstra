@@ -417,26 +417,44 @@ function copyRow()
 }
 
 function addRow()
-{  
-  copyRow();
+{
+  //
+  // Grab the content of the last row in the table
+  //
+  var tableRows = document.getElementById("dijkstra-table-body").rows;
+  var numRows = tableRows.length;
+  var rowCells = tableRows[numRows-1].cells;
+
+  //
+  // Now create the new row
+  //
   var x = document.createElement("tr");
 
+  //
+  // Step 0 is the initialisation phase for the table
+  // so we need to add one to the actual step for display
+  // purposes...
+  //
+
+  //  Cell 0 - Pass
   var a = document.createElement("th");
-  var anode = document.createTextNode(step);
+  var anode = document.createTextNode(step+1);
   var attr = document.createAttribute("scope");
   attr.value = "row";
   a.setAttributeNode(attr);
   a.appendChild(anode);
   x.appendChild(a);
-  
+
+  // Cell 1 - Current Vertex
   var b = document.createElement("td");
-  var bnode = document.createTextNode(step);
+  var bnode = document.createTextNode(visitedVertices[step]);
   b.appendChild(bnode);
   x.appendChild(b);
 
-  for (let i = 0; i < 9; i++) {
+  // Cells 2 to end - distances
+  for (let i = 0; i < 8; i++) {
     b = document.createElement("td");
-    bnode = document.createTextNode(20+i);
+    bnode = document.createTextNode(rowCells[i+2].innerText);
     b.appendChild(bnode);
     x.appendChild(b);
   }
