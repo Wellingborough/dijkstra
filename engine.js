@@ -467,7 +467,7 @@ function addRow()
       var vertexLabel = property;
       var vertexId = mapNodeLabelToId(vertexLabel);
       if (vertexId == i+1) {
-        nextText = rowUpdates[property];
+        newText = rowUpdates[property];
       }
     }
     bnode = document.createTextNode(newText);
