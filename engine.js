@@ -385,6 +385,8 @@ function stepRoute()
   document.getElementById("show-distances").innerHTML = displayString;
   markNode(mapNodeLabelToId(visitedVertices[step]), 1);
 
+  addRow();
+  
   if (step > 0) {
     markNode(mapNodeLabelToId(visitedVertices[step-1]), 2);
   }
@@ -400,4 +402,22 @@ function stepRoute()
   if (step == distances.length) {
     step = -1;
   }
+}
+
+function addRow()
+{
+  var x = document.createElement("tr");
+
+  var a = document.createElement("td");
+  var anode = document.createTextNode(step);
+  a.appendChild(anode);
+  x.appendChild(a);
+
+  for (let i = 0; i < 9; i++) {
+    a = document.createElement("td");
+    anode = document.createTextNode(20+i);
+    a.appendChild(anode);
+    x.appendChild(a);
+  }
+  document.getElementById("dijkstra-table").appendChild(x);;
 }
