@@ -466,7 +466,7 @@ function addRow()
     for (const property in rowUpdates) {
       var vertexLabel = property;
       var vertexId = mapNodeLabelToId(vertexLabel);
-      if vertexId == i+1) {
+      if (vertexId == i+1) {
         nextText = rowUpdates[property];
       }
     }
