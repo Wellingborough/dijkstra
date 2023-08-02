@@ -80,7 +80,7 @@ function generateGraph()
     }
 
     if (!reallyAnOrphan) {
-      break;
+      continue;
     }
     
     let newEdge = {};
