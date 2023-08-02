@@ -73,7 +73,7 @@ function generateGraph()
     //
     let reallyAnOrphan = true;
     for (let sibling of edgeSource) {
-      if (sibling['to'] == orphan) {
+      if (sibling['to'] == orphan+1) {
         reallyAnOrphan = false;
         break;
       }
