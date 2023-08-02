@@ -5,77 +5,7 @@ var nodes, edges, network;
 
 //
 // Create a graph to be analysed
-// Currently hard-coded, should be randomised with some degree
-// of design, e.g., min/max edges per node, work from one node
-// 'outwards' to get some degree of 'flow'.
-//
-function generateGraphOriginal()
-{
-  // Populate the nodes array with nodes
-  nodes = new vis.DataSet([
-    { id: 1, label: " A ", group: 0 },
-    { id: 2, label: " B ", group: 0 },
-    { id: 3, label: " C ", group: 0 },
-    { id: 4, label: " D ", group: 0 },
-    { id: 5, label: " E ", group: 0 },
-    { id: 6, label: " F ", group: 0 },
-    { id: 7, label: " G ", group: 0 },
-    { id: 8, label: " H ", group: 0 },
-  ]);
-
-  // Populate the edges array with edges
-  edges = new vis.DataSet([
-    { from: 1, to: 2, label: "8" },
-    { from: 1, to: 3, label: "5" },
-    { from: 2, to: 3, label: "2" },
-    { from: 2, to: 4, label: "14" },
-    { from: 2, to: 5, label: "3" },
-    { from: 3, to: 5, label: "10" },
-    { from: 4, to: 5, label: "3" },
-    { from: 4, to: 6, label: "7" },
-    { from: 5, to: 6, label: "1" },
-    { from: 5, to: 7, label: "6" },
-    { from: 6, to: 8, label: "4" },
-    { from: 7, to: 8, label: "9" },
-  ]);
-
-  // create a network
-  var container = document.getElementById("mynetwork");
-
-  var data = {
-    nodes: nodes,
-    edges: edges,
-  };
-
-  var options = {
-    nodes: {
-      shape: "circle",
-      size: 60,
-      font: {
-        size: 32,
-      },
-      borderWidth: 2,
-      shadow: true,
-    },
-    edges: {
-      width: 2,
-      shadow: true,
-    },
-  };
-
-  network = new vis.Network(container, data, options);
-
-  //
-  // Finally, build the adjacency list for the graph
-  //
-  buildAdjacencyList();
-}
-
-
-//
-// Create a graph to be analysed
-// Currently hard-coded, should be randomised with some degree
-// of design, e.g., min/max edges per node, work from one node
+// Randomised with some design; min/max edges per node, work from one node
 // 'outwards' to get some degree of 'flow'.
 //
 function generateGraph()
@@ -138,6 +68,21 @@ function generateGraph()
   }
 
   for (let orphan of unconnectedVertices) {
+    //
+    // Is this really an orphan?  Check for incoming edges
+    //
+    let reallyAnOrphan = true;
+    for (let sibling of edgeSource) {
+      if (sibling['to'] == orphan) {
+        reallyAnOrphan = false;
+        break;
+      }
+    }
+
+    if (!reallyAnOrphan) {
+      break;
+    }
+    
     let newEdge = {};
     newEdge['from'] = orphan+1;
     let weight = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
