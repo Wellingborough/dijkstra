@@ -9,7 +9,7 @@ var nodes, edges, network;
 // of design, e.g., min/max edges per node, work from one node
 // 'outwards' to get some degree of 'flow'.
 //
-function generateGraph()
+function generateGraphOriginal()
 {
   // Populate the nodes array with nodes
   nodes = new vis.DataSet([
@@ -38,6 +38,93 @@ function generateGraph()
     { from: 6, to: 8, label: "4" },
     { from: 7, to: 8, label: "9" },
   ]);
+
+  // create a network
+  var container = document.getElementById("mynetwork");
+
+  var data = {
+    nodes: nodes,
+    edges: edges,
+  };
+
+  var options = {
+    nodes: {
+      shape: "circle",
+      size: 60,
+      font: {
+        size: 32,
+      },
+      borderWidth: 2,
+      shadow: true,
+    },
+    edges: {
+      width: 2,
+      shadow: true,
+    },
+  };
+
+  network = new vis.Network(container, data, options);
+
+  //
+  // Finally, build the adjacency list for the graph
+  //
+  buildAdjacencyList();
+}
+
+
+//
+// Create a graph to be analysed
+// Currently hard-coded, should be randomised with some degree
+// of design, e.g., min/max edges per node, work from one node
+// 'outwards' to get some degree of 'flow'.
+//
+function generateGraph()
+{
+  const minVertices = 6;
+  const maxVertices = 12;
+  const minEdgesPerVertex = 1;
+  const maxEdgesPerVertex = 4;
+  const minEdgeWeight = 1;
+  const maxEdgeWeight = 20;
+  const vertexLabels = [" A ", " B ", " C ", " D ", " E ", " F ", " G ", " H ", " I ", " J ", " K ", " L "];
+  
+  let numVertices = Math.floor(Math.random() * (maxVertices - minVertices)) + minVertices;
+
+  let nodeSource = [];
+  for (let i = 0; i < numVertices; i++) {
+    let newNode = {};
+    newNode['id'] = i+1;
+    newNode['label'] = vertexLabels[i];
+    newNode['group'] = 0;
+    nodeSource.push(newNode);
+  }
+
+  // Populate the nodes array with nodes
+  nodes = new vis.DataSet(nodeSource);
+
+  let edgeSource = [];
+  for (let i = 0; i < numVertices; i++) {
+    //
+    // For each vertex, create a number of edges, with connections to other vertices up to
+    // four positions 'away' from the current vertex (working from the first vertex to the
+    // last.  This gives the graph a natural flow.
+    //
+    let numEdges = Math.floor(Math.random() * (maxEdgesPerVertex - minEdgesPerVertex)) + minEdgesPerVertex;
+    let alreadyConnected = [];
+    for (let j = 0; j < numEdges; j++) {
+      let candidateVertex = i + 2 + Math.floor(Math.random() * 4);
+      if ((candidateVertex < numVertices) && !(alreadyConnected.includes(candidateVertex))) {
+        let newEdge = {};
+        newEdge['from'] = i+1;
+        newEdge['to'] = candidateVertex;
+        newEdge['label'] = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
+        alreadyConnected.push(candidateVertex);
+      }
+    }
+  }
+
+  // Populate the edges array with edges
+  edges = new vis.DataSet(edgeSource);
 
   // create a network
   var container = document.getElementById("mynetwork");
