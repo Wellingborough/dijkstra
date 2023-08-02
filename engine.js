@@ -235,23 +235,40 @@ function mapNodeLabelToId(thisLabel) {
   return retval ;
 }
 
-function depthFirstSearch()
+function breadthFirstSearch()
 {
-  let vertexCount = 0;
-
-  let currentVertex = adjacencyList[0];
-
-  //
-  // Possible approach:
-  // Copy adjacencyList.
-  // Maintain a new list of verticesToExplore
   // Maintain a list of exploredVertices
-  // Remove (really remove) the first entry from the adjacencyList, and place it in the verticesToExplore
+  // Maintain a new list of verticesToExplore
+  // Take the first entry from the adjacencyList, and place it in the verticesToExplore
+  let exploredVertices = [];
+  let verticesToExplore = [];
+  
+  let currentVertex = tempAdjacencyList[0];
+  verticesToExplore.push(currentVertex[0]);
+
   // As long as verticesToExplore.length > 0, keep going
   // Take the first item from vertices to explore, check whether it has already been explored, if so continue
   // If not, get the connections, and add them.
-  //
-  return vertexCount;
+  while (verticesToExplore.length > 0) {
+    console.log("exploredVertices:");
+    console.log(exploredVertices);
+    console.log("verticesToExplore:");
+    console.log(verticesToExplore);
+    let currentVertex = verticesToExplore.shift();
+    if (exploredVertices.includes(currentVertex)) {
+      continue;
+    }
+    exploredVertices.push(currentVertex);
+
+    for (let adjacencyListEntry of adjacencyList) {
+      if (adjacencyListEntry[0] == currentVertex) {
+        let neighbours = Object.keys(adjacencyListEntry[1]);
+        verticesToExplore = verticesToExplore.concat(neighbours);
+        break;
+      }
+    }
+  }
+  return exploredVertices.length;
 }
 
 
