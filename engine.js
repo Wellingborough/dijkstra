@@ -137,7 +137,7 @@ function generateGraph()
     }
   }
 
-  for (let orphan of unconnected) {
+  for (let orphan of unconnectedVertices) {
     let newEdge = {};
     newEdge['from'] = orphan+1;
     let weight = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
