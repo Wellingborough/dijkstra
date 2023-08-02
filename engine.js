@@ -121,7 +121,8 @@ function generateGraph()
         let newEdge = {};
         newEdge['from'] = i+1;
         newEdge['to'] = candidateVertex;
-        newEdge['label'] = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
+        let weight = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
+        newEdge['label'] = weight.toString();
         edgeSource.push(newEdge);
         alreadyConnected.push(candidateVertex);
         unconnected = false;
@@ -132,16 +133,21 @@ function generateGraph()
     // Deal with any unconnected vertices - force a connection to their neighbour
     //
     if (unconnected) {
-      let newEdge = {};
-      newEdge['from'] = i+1;
-      newEdge['label'] = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
-      if (i == numVertices -1) {
-        newEdge['to'] = i-2;
-      } else {
-        newEdge['to'] = i+2;
-      }
-      edgeSource.push(newEdge);
+      unconnectedVertices.push(i);
     }
+  }
+
+  for (let orphan of unconnected) {
+    let newEdge = {};
+    newEdge['from'] = orphan+1;
+    let weight = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
+    newEdge['label'] = "Orphan";
+    if (orphan == numVertices -1) {
+      newEdge['to'] = orphan-2;
+    } else {
+      newEdge['to'] = orphan+2;
+    }
+    edgeSource.push(newEdge);
   }
 
   // Populate the edges array with edges
