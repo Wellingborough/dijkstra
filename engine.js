@@ -118,6 +118,7 @@ function generateGraph()
         newEdge['from'] = i+1;
         newEdge['to'] = candidateVertex;
         newEdge['label'] = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
+        edgeSource.push(newEdge);
         alreadyConnected.push(candidateVertex);
       }
     }
