@@ -8,6 +8,17 @@ var nodes, edges, network;
 // Randomised with some design; min/max edges per node, work from one node
 // 'outwards' to get some degree of 'flow'.
 //
+// 'Orphaned' (i.e., unconnected) vertices are detected and connected to
+// other vertices.
+//
+// Currently, unconnected graphs can be created - I plan to check for this
+// situation by doing a DFS starting from an arbitrary vertex and checking
+// that all vertices are reached.  If no, I think the simplest solution
+// may be to connected one of the vertices in the unconnected group to one
+// in the DFS'ed group, but we would then have to retest, in case there are
+// more than two unconnected groups.  An alternative would be to junk the
+// graph and regenerate, but that is not very elegant.
+//
 function generateGraph()
 {
   const minVertices = 6;
@@ -169,7 +180,7 @@ function buildAdjacencyList()
   //
   // Reset the list
   //
-  ajacencyList = [];
+  adjacencyList = [];
   
   nodeList = nodes.get({fields: ['id', 'label', 'group']});
   edgeList = edges.get({fields: ['from', 'to', 'label']});
@@ -223,6 +234,26 @@ function mapNodeLabelToId(thisLabel) {
   }
   return retval ;
 }
+
+function depthFirstSearch()
+{
+  let vertexCount = 0;
+
+  let currentVertex = adjacencyList[0];
+
+  //
+  // Possible approach:
+  // Copy adjacencyList.
+  // Maintain a new list of verticesToExplore
+  // Maintain a list of exploredVertices
+  // Remove (really remove) the first entry from the adjacencyList, and place it in the verticesToExplore
+  // As long as verticesToExplore.length > 0, keep going
+  // Take the first item from vertices to explore, check whether it has already been explored, if so continue
+  // If not, get the connections, and add them.
+  //
+  return vertexCount;
+}
+
 
 //
 // These variables at global level to be used by results display
