@@ -243,7 +243,7 @@ function breadthFirstSearch()
   let exploredVertices = [];
   let verticesToExplore = [];
   
-  let currentVertex = tempAdjacencyList[0];
+  let currentVertex = adjacencyList[0];
   verticesToExplore.push(currentVertex[0]);
 
   // As long as verticesToExplore.length > 0, keep going
