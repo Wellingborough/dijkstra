@@ -103,6 +103,8 @@ function generateGraph()
   nodes = new vis.DataSet(nodeSource);
 
   let edgeSource = [];
+  let unconnectedVertices = [];
+  
   for (let i = 0; i < numVertices; i++) {
     //
     // For each vertex, create a number of edges, with connections to other vertices up to
@@ -111,16 +113,34 @@ function generateGraph()
     //
     let numEdges = Math.floor(Math.random() * (maxEdgesPerVertex - minEdgesPerVertex)) + minEdgesPerVertex;
     let alreadyConnected = [];
+    let unconnected = true;
+    
     for (let j = 0; j < numEdges; j++) {
       let candidateVertex = i + 2 + Math.floor(Math.random() * 4);
-      if ((candidateVertex < numVertices) && !(alreadyConnected.includes(candidateVertex))) {
+      if ((candidateVertex <= numVertices) && !(alreadyConnected.includes(candidateVertex))) {
         let newEdge = {};
         newEdge['from'] = i+1;
         newEdge['to'] = candidateVertex;
         newEdge['label'] = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
         edgeSource.push(newEdge);
         alreadyConnected.push(candidateVertex);
+        unconnected = false;
       }
+    }
+
+    //
+    // Deal with any unconnected vertices - force a connection to their neighbour
+    //
+    if (unconnected) {
+      let newEdge = {};
+      newEdge['from'] = i+1;
+      newEdge['label'] = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
+      if (i == numVertices -1) {
+        newEdge['to'] = i-2;
+      } else {
+        newEdge['to'] = i+2;
+      }
+      edgeSource.push(newEdge);
     }
   }
 
