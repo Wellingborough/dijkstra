@@ -624,7 +624,7 @@ function handleFile() {
     for (let node of obj) {
       let newNode = {};
       newNode['id'] = nodeId;
-      newNode['label'] = node[0];
+      newNode['label'] = " " + node[0] + " ";
       newNode['group'] = 0;
       nodeSource.push(newNode);
       nodeId++;
@@ -640,7 +640,8 @@ function handleFile() {
         //
         let nodeId = 0;
         for (let n of nodeSource) {
-          if (n['label'] == node[0]) {
+          let formattedLabel = " " + node[0] + " ";
+          if (n['label'] == formattedLabel) {
             nodeId = n['id'];
           }
         }
@@ -651,13 +652,23 @@ function handleFile() {
         //
         let neighbourId = 0;
         for (let n of nodeSource) {
-          if (n['label'] == neighbour) {
+          let formattedLabel = " " + neighbour + " ";
+          if (n['label'] == formattedLabel) {
             neighbourId = n['id'];
           }
         }
         newEdge['to'] = neighbourId;
-        newEdge['label'] = node[1][neighbour].toString();
-        edgeSource.push(newEdge);
+        let formattedLabel = " " + node[1][neighbour].toString() + " ";
+        newEdge['label'] = formattedLabel;
+
+        // 
+        // This is a bit hacky, but our adjacency list contains all edges for
+        // each node, so if the neighbour id is less than the current node id
+        // then we will already have added this edge.
+        //
+        if (neighbourId > nodeId) {
+          edgeSource.push(newEdge);
+        }
       }
     }
   
