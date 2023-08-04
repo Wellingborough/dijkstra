@@ -643,6 +643,7 @@ function handleFile() {
         for (let n of nodeSource) {
           if (n['label'] == neighbour) {
             neighbourId = n['id'];
+          }
         }
         newEdge['to'] = neighbourId;
         newEdge['label'] = node[1][neighbour].toString();
