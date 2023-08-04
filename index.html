@@ -38,7 +38,7 @@
     </style>
   </head>
   
-  <body>
+  <body onload="setupDemonstrator()">
 
     <!-- Bootstrap Navbar                                                          -->
     <!-- Expand at small viewport size - it consists just of five buttons and a    -->
@@ -86,6 +86,7 @@
           <button type="button" class="btn btn-dark" onclick="breadthFirstSearch()">BFS</button>
           <button type="button" class="btn btn-dark" onclick="solveDijkstra()">Solve</button>
           <button type="button" class="btn btn-dark" onclick="stepRoute()">Step</button>
+          <input id="load-btn" type="file" style="display:none;">
           <p id="show-distances">Route...</p>
           <!-- Note, this table is programmatically bmodified in JavaScript, so any changes -->
           <!-- in design here, must be reflected in engine.js too.                          -->
