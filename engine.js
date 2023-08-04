@@ -595,8 +595,81 @@ function handleFile() {
   let codeReader = new FileReader();
 
   codeReader.onload = function(event) {
-    const obj = JSON.parse(event.target.result);
+    const obj = {};
 
+    // 
+    // Attempt to parse the selected file as JSON
+    //
+    try {
+      obj = JSON.parse(event.target.result);
+    } catch (error) {
+      console.log(error);
+      alert(error);
+      return;
+    }
+
+    //
+    // Now we have a JSON object containing the adjacency list
+    //
+    let nodeSource = [];
+    let edgeSource = [];
+    let nodeId = 1;
+    
+    for (let node of obj) {
+      let newNode = {};
+      newNode['id'] = nodeId;
+      newNode['label'] = node[0];
+      newNode['group'] = 0;
+      nodeSource.push(newNode);
+
+      let neighbours = Object.keys(node[1]);
+
+      for (neighbour in neighbours) {
+        let newEdge = {};
+        newEdge['from'] = nodeId;
+        newEdge['to'] = neighbour;
+        newEdge['label'] = node[1][neighbour].toString();
+        edgeSource.push(newEdge);
+      }
+    }
+  
+    // Populate the nodes array with nodes
+    nodes = new vis.DataSet(nodeSource);
+    
+    // Populate the edges array with edges
+    edges = new vis.DataSet(edgeSource);
+  
+    // create a network
+    var container = document.getElementById("mynetwork");
+  
+    var data = {
+      nodes: nodes,
+      edges: edges,
+    };
+  
+    var options = {
+      nodes: {
+        shape: "circle",
+        size: 60,
+        font: {
+          size: 32,
+        },
+        borderWidth: 2,
+        shadow: true,
+      },
+      edges: {
+        width: 2,
+        shadow: true,
+      },
+    };
+  
+    network = new vis.Network(container, data, options);
+  
+    //
+    // Finally, build the adjacency list for the graph
+    //
+    buildAdjacencyList();
+  
     // Finally, we need to change the value of the load button here, so that we can reload 
     // the same file BUT we don't want to refire the change event!
     //
