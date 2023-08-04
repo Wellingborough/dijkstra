@@ -583,3 +583,37 @@ function addRow()
   }
   document.getElementById("dijkstra-table-body").appendChild(x);
 }
+
+
+
+//
+// Respond to file load
+//
+function handleFile() {
+  let newData=[];
+
+  let codeReader = new FileReader();
+
+  codeReader.onload = function(event) {
+    ;
+
+    // Finally, we need to change the value of the load button here, so that we can reload 
+    // the same file BUT we don't want to refire the change event!
+    //
+    document.getElementById("load-btn").removeEventListener('change', handleFile, false);
+    document.getElementById("load-btn").value = null;
+    document.getElementById("load-btn").addEventListener('change', handleFile, false);
+  }
+
+  codeReader.readAsText(this.files[0]);
+}
+
+//
+// Setup - called on body load...
+//
+function setupDemonstrator() {
+  //
+  // Set up file handler
+  //
+  document.getElementById("load-btn").addEventListener('change', handleFile, false);
+}
