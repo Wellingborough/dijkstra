@@ -635,7 +635,17 @@ function handleFile() {
 
       for (let neighbour of neighbours) {
         let newEdge = {};
+        //
+        // Look up the the current node label and map to nodeId
+        //
+        let nodeId = 0;
+        for (let n of nodeSource) {
+          if (n['label'] == node[0]) {
+            nodeId = n['id'];
+          }
+        }
         newEdge['from'] = nodeId;
+        
         //
         // Look up the neighbour label and map to nodeId
         //
