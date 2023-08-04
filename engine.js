@@ -595,7 +595,7 @@ function handleFile() {
   let codeReader = new FileReader();
 
   codeReader.onload = function(event) {
-    const obj = {};
+    let obj = {};
 
     // 
     // Attempt to parse the selected file as JSON
@@ -604,7 +604,7 @@ function handleFile() {
       obj = JSON.parse(event.target.result);
     } catch (error) {
       console.log(error);
-      alert(error);
+      alert("Hmmm.  That file does not appear to contain a graph definition...");
       return;
     }
 
