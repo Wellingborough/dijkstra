@@ -614,20 +614,37 @@ function handleFile() {
     let nodeSource = [];
     let edgeSource = [];
     let nodeId = 1;
-    
+
+    //
+    // This has to be a 2 pass operation, as the edges refer to nodeIds,
+    // rather than labels, so we need to build the list of nodes first in
+    // nodeSource, then we can do the label-to-Id mapping when we create
+    // the edges.
+    //
     for (let node of obj) {
       let newNode = {};
       newNode['id'] = nodeId;
       newNode['label'] = node[0];
       newNode['group'] = 0;
       nodeSource.push(newNode);
+      nodeId++;
+    }
 
+    for (let node of obj) {
       let neighbours = Object.keys(node[1]);
 
-      for (neighbour of neighbours) {
+      for (let neighbour of neighbours) {
         let newEdge = {};
         newEdge['from'] = nodeId;
-        newEdge['to'] = neighbour;
+        //
+        // Look up the neighbour label and map to nodeId
+        //
+        let neighbourId = 0;
+        for (let n of nodeSource) {
+          if (n['label'] == neighbour) {
+            neighbourId = n['id'];
+        }
+        newEdge['to'] = neighbourId;
         newEdge['label'] = node[1][neighbour].toString();
         edgeSource.push(newEdge);
       }
