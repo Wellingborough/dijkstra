@@ -595,7 +595,7 @@ function handleFile() {
   let codeReader = new FileReader();
 
   codeReader.onload = function(event) {
-    ;
+    const obj = JSON.parse(event.target.result);
 
     // Finally, we need to change the value of the load button here, so that we can reload 
     // the same file BUT we don't want to refire the change event!
