@@ -624,7 +624,7 @@ function handleFile() {
 
       let neighbours = Object.keys(node[1]);
 
-      for (neighbour in neighbours) {
+      for (neighbour of neighbours) {
         let newEdge = {};
         newEdge['from'] = nodeId;
         newEdge['to'] = neighbour;
