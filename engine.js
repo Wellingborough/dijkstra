@@ -588,10 +588,26 @@ function addRow()
   document.getElementById("dijkstra-table-body").appendChild(x);
 }
 
+//
+// File Save
+//
+function saveGraph() {
+  let resString = "data:text/plain;charset=UTF-8,";
+  let content = JSON.stringify(adjacencyList);
+
+  let element = document.createElement('a');
+  element.setAttribute('href', resString+content);
+  element.setAttribute('download', "graph.json");
+  element.style.display='none';
+  
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
 
 
 //
-// Respond to file load
+// File Load
 //
 function handleFile() {
   let newData=[];
