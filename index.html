@@ -90,36 +90,38 @@
           <p id="show-distances">Route...</p>
           <!-- Note, this table is programmatically bmodified in JavaScript, so any changes -->
           <!-- in design here, must be reflected in engine.js too.                          -->
-          <table class="table" id="dijkstra-table">
-            <thead>
-              <tr>
-                <th scope="col">Pass</th>
-                <th scope="col">Vertex</th>
-                <th scope="col">A</th>
-                <th scope="col">B</th>
-                <th scope="col">C</th>
-                <th scope="col">D</th>
-                <th scope="col">E</th>
-                <th scope="col">F</th>
-                <th scope="col">G</th>
-                <th scope="col">H</th>
-              </tr>
-            </thead>
-            <tbody id="dijkstra-table-body">
-              <tr>
-                <th scope="row">0</th>
-                <td>&ndash;</td>
-                <td>0</td>
-                <td>&infin;</td>
-                <td>&infin;</td>
-                <td>&infin;</td>
-                <td>&infin;</td>
-                <td>&infin;</td>
-                <td>&infin;</td>
-                <td>&infin;</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table" id="dijkstra-table">
+              <thead>
+                <tr>
+                  <th scope="col">Pass</th>
+                  <th scope="col">Vertex</th>
+                  <th scope="col">A</th>
+                  <th scope="col">B</th>
+                  <th scope="col">C</th>
+                  <th scope="col">D</th>
+                  <th scope="col">E</th>
+                  <th scope="col">F</th>
+                  <th scope="col">G</th>
+                  <th scope="col">H</th>
+                </tr>
+              </thead>
+              <tbody id="dijkstra-table-body">
+                <tr>
+                  <th scope="row">0</th>
+                  <td>&ndash;</td>
+                  <td>0</td>
+                  <td>&infin;</td>
+                  <td>&infin;</td>
+                  <td>&infin;</td>
+                  <td>&infin;</td>
+                  <td>&infin;</td>
+                  <td>&infin;</td>
+                  <td>&infin;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="col-sm-8" id="graph">
           <div id="mynetwork"></div>
