@@ -97,7 +97,7 @@ function generateGraph()
     let newEdge = {};
     newEdge['from'] = orphan+1;
     let weight = Math.floor(Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
-    newEdge['label'] = "Orphan";
+    newEdge['label'] = weight.toString();
     if (orphan == numVertices -1) {
       newEdge['to'] = orphan-2;
     } else {
@@ -267,6 +267,10 @@ function breadthFirstSearch()
         break;
       }
     }
+  }
+
+  if (exploredVertices.length != adjacencyList.length) {
+    alert("Unconnected graph");
   }
   return exploredVertices.length;
 }
