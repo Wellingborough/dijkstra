@@ -113,7 +113,7 @@ function generateGraph()
   var container = document.getElementById("graph");
   var network = document.getElementById("mynetwork");
   network.style.width = container.offsetWidth;
-  netwpork.style.height = container.offsetHeight;
+  network.style.height = container.offsetHeight;
   
   var data = {
     nodes: nodes,
