@@ -110,10 +110,6 @@ function generateGraph()
   edges = new vis.DataSet(edgeSource);
 
   // create a network
-  var container = document.getElementById("graph");
-  var network = document.getElementById("mynetwork");
-  network.style.width = container.offsetWidth-20;
-  network.style.height = container.offsetHeight-20;
   
   var data = {
     nodes: nodes,
