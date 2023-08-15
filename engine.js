@@ -112,8 +112,8 @@ function generateGraph()
   // create a network
   var container = document.getElementById("graph");
   var network = document.getElementById("mynetwork");
-  network.style.width = container.offsetWidth;
-  network.style.height = container.offsetHeight;
+  network.style.width = container.offsetWidth-20;
+  network.style.height = container.offsetHeight-20;
   
   var data = {
     nodes: nodes,
